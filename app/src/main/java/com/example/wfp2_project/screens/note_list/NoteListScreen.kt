@@ -38,7 +38,7 @@ fun NoteListScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Notes") },
+                title = {  },
                 navigationIcon = {
                     IconButton(
                         onClick =  {}){
@@ -81,7 +81,7 @@ fun NoteList(
     LazyColumn(contentPadding = padding) {
         item {
             Text(
-                text = "Your Notes",
+                text = "To-Do´s",
                 style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             )

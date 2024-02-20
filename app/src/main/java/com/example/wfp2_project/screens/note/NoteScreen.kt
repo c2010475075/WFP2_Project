@@ -3,38 +3,29 @@
 package com.example.wfp2_project.screens.note
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-
 import android.app.DatePickerDialog
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.wfp2_project.R
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 @Composable
 fun NoteScreen(
@@ -45,7 +36,7 @@ fun NoteScreen(
     var showDialogControl = remember { mutableStateOf(false) }
     val calendar = Calendar.getInstance()
 
-    val dateFormat = remember { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) }
+    val dateFormat = remember { SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()) }
     // Setze den Listener für den DatePickerDialog
     if (showDialogControl.value) {
         val year = calendar.get(Calendar.YEAR)
@@ -71,7 +62,7 @@ fun NoteScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { "Create your tasks" },
+                title = { Text("Create your tasks")     },
                 navigationIcon = {
                     IconButton(
                         onClick = {
@@ -87,7 +78,7 @@ fun NoteScreen(
                 actions = {
                     IconButton(
                         onClick = {
-                            onEvent(NoteEvent.DeleteNote)
+                           onEvent(NoteEvent.DeleteNote)
                         }
                     ) {
                         Icon(
@@ -109,7 +100,7 @@ fun NoteScreen(
                 ),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            OutlinedTextField(
+            TextField(
                 modifier = Modifier
                     .fillMaxWidth(),
                 value = state.title,
@@ -117,8 +108,12 @@ fun NoteScreen(
                     onEvent(NoteEvent.TitleChange(it))
                 },
                 placeholder = {
-                    Text(text = "Title")
-                }
+                    Text(text = "Title",style = TextStyle(
+                        fontSize = 32.sp,
+                    ) )
+                },colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.Transparent
+                ),
 
             )
             OutlinedTextField(
@@ -132,7 +127,8 @@ fun NoteScreen(
                     Text(text = "Description")
                 },
                 label = {
-                    Text(text= "Description"
+                    Text(
+                        text = "Description"
                     )
                 },
                 colors = TextFieldDefaults.textFieldColors(
@@ -146,10 +142,22 @@ fun NoteScreen(
 
             // Datum auswählen Button
 
-            Button(
-                onClick = { showDialogControl.value = true },
-            ) {
-                Text(text = "Pick Date")
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(
+                    onClick = { showDialogControl.value = true }
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_calendar),
+                        contentDescription = "Date",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+                Text(text = "Pick Date",
+                    modifier = Modifier
+                        .clickable {
+                            showDialogControl.value = true
+                        }.padding(start = 8.dp)
+                )
             }
 
             // Anzeige des ausgewählten Datums
@@ -167,6 +175,4 @@ fun NoteScreen(
             ) {
                 Text(text = "Save")
             }
-        }
-    }
-}
+        }}}

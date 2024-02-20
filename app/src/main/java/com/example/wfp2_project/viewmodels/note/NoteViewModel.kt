@@ -94,6 +94,10 @@ class NoteViewModel @Inject constructor(
                     } else {
                         repository.updateNote(note)
                     }
+                    state.date?.let {
+                        repository.scheduleNotificationForNote(note.id ?: 0, note.title)
+
+                    }
                     sendEvent(UiEvent.NavigateBack)
                 }
             }

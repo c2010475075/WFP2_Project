@@ -1,5 +1,12 @@
 package com.example.wfp2_project
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
@@ -19,6 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.wfp2_project.navigation.Route
 import com.example.wfp2_project.navigation.UiEvent
+
 import com.example.wfp2_project.screens.note.NoteEvent
 import com.example.wfp2_project.screens.note.NoteScreen
 import com.example.wfp2_project.screens.note_list.NoteListScreen
@@ -30,6 +39,7 @@ import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -89,5 +99,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
+
+    }}

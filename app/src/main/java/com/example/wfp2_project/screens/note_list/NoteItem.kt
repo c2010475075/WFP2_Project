@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.wfp2_project.common.Note
 import com.example.wfp2_project.screens.note.NoteEvent
 import java.text.SimpleDateFormat
@@ -43,20 +44,23 @@ fun NoteItem(
         ) {
             Text(
                 text = note.title,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
+                fontSize = 15.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = note.content,
                 style = MaterialTheme.typography.bodyMedium,
                 maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                fontSize = 10.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
 // Datum anzeigen
             Text(
-                text = "Date: $dateString",
-                style = MaterialTheme.typography.bodySmall
+                text = "Start on $dateString",
+                style = MaterialTheme.typography.bodySmall,
+                fontSize = 15.sp
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -79,3 +83,4 @@ fun NoteItem(
         }
     }
 }
+
