@@ -15,4 +15,9 @@ interface NoteRepository {
     suspend fun deleteNote(note: Note)
 
     suspend fun updateNote(note: Note)
+
+    suspend fun scheduleNotificationForNote(noteId: Int, noteTitle: String)
+
+
 }
+
